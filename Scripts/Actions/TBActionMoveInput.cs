@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public interface TBAbilityMoveInput {
+public interface TBActionMoveInput {
 	Vector3 TargetMoveDirection();
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TBAbilitySprintInputPlayer : MonoBehaviour, TBAbilitySprintInput {
+public class TBActionSprintInputPlayer : MonoBehaviour, TBActionSprintInput {
 	
 	public bool Sprinting()
 	{

@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public interface TBAbilitySprintInput {
+public interface TBActionSprintInput {
 	bool Sprinting();
 }

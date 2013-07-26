@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TBAbilityMoveInputPlayer : MonoBehaviour, TBAbilityMoveInput {
+public class TBActionMoveInputPlayer : MonoBehaviour, TBActionMoveInput {
 	
 	public Vector3 TargetMoveDirection()
 	{

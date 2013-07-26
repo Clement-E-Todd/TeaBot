@@ -1,24 +1,24 @@
 using UnityEngine;
 using System.Collections;
 
-public class TBAbilityMove : MonoBehaviour {
+public class TBActionMove : MonoBehaviour {
 	
 	TBCharacter character;
-	TBAbilityMoveInput abilityInput;
+	TBActionMoveInput actionInput;
 	public float moveSpeedMax = 4.0f;
 	float boostedSpeedMax = 0.0f;
 	
 	protected void Start()
 	{
 		character = (TBCharacter)GetComponent(typeof(TBCharacter));
-		abilityInput = (TBAbilityMoveInput)GetComponent(typeof(TBAbilityMoveInput));
+		actionInput = (TBActionMoveInput)GetComponent(typeof(TBActionMoveInput));
 	}
 
 	void Update()
 	{
-		if (abilityInput != null)
+		if (actionInput != null)
 		{
-			Vector3 targetDirection = abilityInput.TargetMoveDirection();
+			Vector3 targetDirection = actionInput.TargetMoveDirection();
 			
 			if (character.IsGrounded())
 			{
