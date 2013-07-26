@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class TBMovementPlayer : MonoBehaviour, TBMovementInteface {
+public class TBAbilityMoveInputPlayer : MonoBehaviour, TBAbilityMoveInput {
 	
-	public Vector3 TargetMovementDirection()
+	public Vector3 TargetMoveDirection()
 	{
 		var cameraTransform = Camera.main.transform;
 	
@@ -19,10 +19,5 @@ public class TBMovementPlayer : MonoBehaviour, TBMovementInteface {
 		float horizontalAxis = Input.GetAxisRaw("Horizontal");
 		
 		return (horizontalAxis * right) + (verticalAxis * forward);
-	}
-	
-	public bool Sprinting()
-	{
-		return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 	}
 }
