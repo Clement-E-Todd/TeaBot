@@ -20,4 +20,14 @@ public class TBActionMoveInputPlayer : MonoBehaviour, TBActionMoveInput {
 		
 		return (horizontalAxis * right) + (verticalAxis * forward);
 	}
+	
+	public bool Sprinting()
+	{
+		return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+	}
+	
+	public bool Strafing()
+	{
+		return Input.GetKey(KeyCode.Tab);
+	}
 }

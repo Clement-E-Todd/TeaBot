@@ -6,8 +6,8 @@ public class TBActionMove : MonoBehaviour {
 	TBCharacter character;
 	TBActionMoveInput actionInput;
 	public float moveSpeedMax = 4.0f;
+	public float sprintSpeedMax = 8.0f;
 	public float slowSpeedLimit = 1.0f;
-	float boostedSpeedMax = 0.0f;
 	public float rotateSpeedMax = 3.0f;
 	public float arialAccelRate = 3.0f;
 
@@ -44,11 +44,13 @@ public class TBActionMove : MonoBehaviour {
 				}
 				
 				float targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0f);
-				targetSpeed *= Mathf.Max(moveSpeedMax, boostedSpeedMax);
+				targetSpeed *= actionInput.Sprinting() ? sprintSpeedMax : moveSpeedMax;
 				character.horizontalSpeed = Mathf.Lerp(character.horizontalSpeed, targetSpeed, Time.deltaTime*10);
-				boostedSpeedMax = 0;
 				
-				transform.rotation = Quaternion.LookRotation(character.horizontalDirection);
+				if (!actionInput.Strafing() && targetDirection != Vector3.zero)
+				{
+					transform.rotation = Quaternion.LookRotation(character.horizontalDirection);
+				}
 			}
 			else
 			{
@@ -58,10 +60,5 @@ public class TBActionMove : MonoBehaviour {
 				}
 			}
 		}
-	}
-	
-	public void BoostTopSpeed(float newTopSpeed)
-	{
-		boostedSpeedMax = Mathf.Max(boostedSpeedMax, newTopSpeed);
 	}
 }
