@@ -6,8 +6,11 @@ public class TBActionMove : MonoBehaviour {
 	TBCharacter character;
 	TBActionMoveInput actionInput;
 	public float moveSpeedMax = 4.0f;
+	public float slowSpeedLimit = 1.0f;
 	float boostedSpeedMax = 0.0f;
-	
+	public float rotateSpeedMax = 3.0f;
+	public float arialAccelRate = 3.0f;
+
 	protected void Start()
 	{
 		character = (TBCharacter)GetComponent(typeof(TBCharacter));
@@ -25,14 +28,17 @@ public class TBActionMove : MonoBehaviour {
 				if (targetDirection != Vector3.zero)
 				{
 					// If movement is very slow, face intended direction immediately
-					if (character.horizontalSpeed < moveSpeedMax/2)
+					if (character.horizontalSpeed < slowSpeedLimit)
 					{
 						character.horizontalDirection = targetDirection.normalized;
 					}
 					// Otherwise turn gradually towards it
 					else
 					{
-						character.horizontalDirection = Vector3.RotateTowards(character.horizontalDirection, targetDirection, character.rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);
+						character.horizontalDirection = Vector3.RotateTowards(character.horizontalDirection,
+																			  targetDirection,
+																			  (rotateSpeedMax*1000) / character.horizontalSpeed * Mathf.Deg2Rad * Time.deltaTime,
+																			  1000);
 						character.horizontalDirection = character.horizontalDirection.normalized;
 					}
 				}
@@ -41,12 +47,14 @@ public class TBActionMove : MonoBehaviour {
 				targetSpeed *= Mathf.Max(moveSpeedMax, boostedSpeedMax);
 				character.horizontalSpeed = Mathf.Lerp(character.horizontalSpeed, targetSpeed, Time.deltaTime*10);
 				boostedSpeedMax = 0;
+				
+				transform.rotation = Quaternion.LookRotation(character.horizontalDirection);
 			}
 			else
 			{
 				if (targetDirection != Vector3.zero)
 				{
-					character.arialVelocity += targetDirection.normalized * Time.deltaTime * character.arialAcceleration;
+					character.arialVelocity += targetDirection.normalized * Time.deltaTime * arialAccelRate;
 				}
 			}
 		}

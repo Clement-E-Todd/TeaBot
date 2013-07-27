@@ -8,9 +8,6 @@ public class TBCharacter : MonoBehaviour {
 	public float verticalSpeed = 0;
 	public Vector3 arialVelocity = Vector3.zero;
 	
-	public float rotateSpeed = 500.0f;
-	public float arialAcceleration = 3.0f;
-	
 	CollisionFlags collisionFlags;
 	
 	CharacterController characterController;
