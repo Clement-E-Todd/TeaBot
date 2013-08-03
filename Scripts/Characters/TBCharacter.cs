@@ -42,7 +42,7 @@ public class TBCharacter : MonoBehaviour {
 	void ApplyGravity()
 	{
 		float gravity = TBPhysicsManager.gravityStrength;
-		verticalSpeed = verticalSpeed - gravity;
+		verticalSpeed -= gravity;
 		if (IsGrounded() && verticalSpeed < -gravity) verticalSpeed = -gravity;
 	}
 	
