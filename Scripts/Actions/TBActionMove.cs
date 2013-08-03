@@ -5,8 +5,9 @@ public class TBActionMove : MonoBehaviour {
 	
 	TBCharacter character;
 	TBActionMoveInput actionInput;
+	TBActionDuck duckAction;
 	public float moveSpeedMax = 4.0f;
-	public float sprintSpeedMax = 8.0f;
+	public float sprintSpeedMax = 6.0f;
 	public float slowSpeedLimit = 1.0f;
 	public float rotateSpeedMax = 3.0f;
 	public float arialAccelRate = 3.0f;
@@ -15,6 +16,7 @@ public class TBActionMove : MonoBehaviour {
 	{
 		character = (TBCharacter)GetComponent(typeof(TBCharacter));
 		actionInput = (TBActionMoveInput)GetComponent(typeof(TBActionMoveInput));
+		duckAction = (TBActionDuck)GetComponent(typeof(TBActionDuck));
 	}
 
 	void Update()
@@ -44,7 +46,10 @@ public class TBActionMove : MonoBehaviour {
 				}
 				
 				float targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0f);
-				targetSpeed *= actionInput.Sprinting() ? sprintSpeedMax : moveSpeedMax;
+				bool crawling = (duckAction != null && duckAction.duckingDepth >= duckAction.minCrawlDepth);
+				targetSpeed *= !crawling ?
+					(actionInput.Sprinting() ? sprintSpeedMax : moveSpeedMax) :
+					duckAction.maxCrawlSpeed;
 				character.horizontalSpeed = Mathf.Lerp(character.horizontalSpeed, targetSpeed, Time.deltaTime*10);
 				
 				if (!actionInput.Strafing() && targetDirection != Vector3.zero)

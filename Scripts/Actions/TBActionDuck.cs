@@ -3,17 +3,17 @@ using System.Collections;
 
 public class TBActionDuck : MonoBehaviour {
 	
-	TBCharacter character;
 	TBActionDuckInput actionInput;
 	CharacterController characterController;
 	
 	public float duckingDepth = 0.0f; // 0 = standing, 1 = litterally two-dimensional
 	public float maxDuckingDepth = 0.5f;
+	public float maxCrawlSpeed = 2.0f;
+	public float minCrawlDepth = 0.2f;
 	float standingHeight;
 
 	protected void Start()
 	{
-		character = (TBCharacter)GetComponent(typeof(TBCharacter));
 		actionInput = (TBActionDuckInput)GetComponent(typeof(TBActionDuckInput));
 		characterController = (CharacterController)GetComponent(typeof(CharacterController));
 		
