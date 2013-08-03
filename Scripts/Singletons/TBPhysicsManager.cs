@@ -10,7 +10,7 @@ public static class TBPhysicsManager {
 //		set { m_GravityDirection = value.normalized; }
 //	}
 	
-	static float m_GravityStrength = 1;
+	static float m_GravityStrength = 0.98f;
 	public static float gravityStrength {
 		get { return m_GravityStrength; }
 		set { m_GravityStrength = value; }
